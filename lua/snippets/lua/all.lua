@@ -120,4 +120,10 @@ return {
     end),
     i(1),
   }),
+  s({
+    trig = "td",
+    name = "TODO:",
+    dscr = "Create TODO",
+    priority = 5000,
+  }, fmt([[{{/*TODO: {}*/}}]], i(1))),
 }

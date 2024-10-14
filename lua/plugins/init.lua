@@ -110,7 +110,7 @@ return {
         on_save_enabled = true, -- If `true`, automatically enables on save sorting.
         on_save_pattern = { "*.html", "*.js", "*.jsx", "*.tsx", "*.twig", "*.hbs", "*.php", "*.heex", "*.astro" }, -- The file patterns to watch and sort.
         node_path = "node",
-        trim_spaces = true, -- If `true`, trim any extra spaces after sorting.
+        trim_spaces = false, -- If `true`, trim any extra spaces after sorting.
       }
     end,
   },
@@ -136,28 +136,6 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
   },
-  { "nvchad/volt", lazy = true },
-  {
-    "nvchad/minty",
-    lazy = true,
-    dependencies = { "nvchad/volt" },
-    keys = {
-      {
-        "<leader>oc",
-        function()
-          require("minty.huefy").toggle()
-        end,
-        desc = "Open color picker",
-      },
-      {
-        "<leader>os",
-        function()
-          require("minty.shades").toggle()
-        end,
-        desc = "Open color shades",
-      },
-    },
-  },
   {
     "HiPhish/rainbow-delimiters.nvim",
     event = "LspAttach",
@@ -176,6 +154,7 @@ return {
     end,
   },
   { "nvchad/volt", lazy = true },
+  { "nvchad/menu", lazy = true },
   {
     "nvchad/minty",
     lazy = true,
@@ -197,4 +176,17 @@ return {
       },
     },
   },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    opts = require "configs.custom.todo",
+  }, -- To make a plugin not be loaded
 }

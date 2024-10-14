@@ -61,3 +61,19 @@ map({ "i", "s" }, "<A-j>", function()
 end, { silent = true })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>");
+
+-- menu
+
+-- Keyboard users
+map("n", "<C-t>", function()
+  require("menu").open "default"
+end, {})
+
+-- mouse users + nvimtree users!
+
+map("n", "<RightMouse>", function()
+  vim.cmd.exec '"normal! \\<RightMouse>"'
+
+  local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+  require("menu").open(options, { mouse = true })
+end, {})

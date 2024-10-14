@@ -1,21 +1,20 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    -- css = { "prettier" },
-    -- html = { "prettier" },
     css = { "prettier" },
     html = { "prettier" },
-    javascript = { "prettierd" },
-    typescript = { "prettierd" },
-    typescriptreact = { "prettierd" },
-    javascriptreact = { "prettierd" },
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    javascriptreact = { "prettier" },
     json = { "prettier" },
     yaml = { "prettier" },
     markdown = { "prettier" },
+    svg = { "prettier" },
   },
 
   formatters = {
-    prettierd = {
+    prettier = {
       prepend_args = {
         "--single-attribute-per-line",
         "--no-bracket-same-line",

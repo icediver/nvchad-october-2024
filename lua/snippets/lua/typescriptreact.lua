@@ -155,7 +155,7 @@ return {
       priority = 5000,
     },
     fmt(
-      [[export default function {}layout ({{ children }}: {{ children: Rect.ReactNode }})  {{
+      [[export default function {}Layout ({{ children }}: {{ children: React.ReactNode }})  {{
           return <div>{{children}}</div>
     }}
     ]],
