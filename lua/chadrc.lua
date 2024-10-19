@@ -54,7 +54,22 @@ M.ui = {
   statusline = {
     separator_style = "arrow",
     theme = "default",
-    order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd", "cursor" },
+    order = {
+      "mode",
+      "file",
+      "git",
+      "%=",
+      "lsp_msg",
+      "%=",
+      "diagnostics",
+      "lsp",
+      "cwd",
+      "cursor",
+      "position",
+    },
+    modules = {
+      position = " Ln: %l🔰Col: %c",
+    },
   },
   telescope = {
     style = "bordered",

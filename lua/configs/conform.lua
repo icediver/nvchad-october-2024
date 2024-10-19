@@ -17,7 +17,7 @@ local options = {
     prettier = {
       prepend_args = {
         "--single-attribute-per-line",
-        "--no-bracket-same-line",
+        "--bracket-same-line",
       },
     },
   },

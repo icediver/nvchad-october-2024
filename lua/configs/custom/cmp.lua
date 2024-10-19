@@ -112,7 +112,7 @@ local options = {
     ["<c-space>"] = cmp.mapping.complete(),
     ["<c-e>"] = cmp.mapping.close(),
 
-    ["<cr>"] = cmp.mapping.confirm {
+    ["<CR>"] = cmp.mapping.confirm {
       -- behavior = cmp.confirmbehavior.insert,
       select = true,
     },
