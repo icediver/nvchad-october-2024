@@ -19,7 +19,7 @@ M.base46 = {
 
   hl_override = {
     Comment = { italic = true, bg = "none", fg = "#059669" },
-    ["@comment"] = { italic = true, bg = "none", fg = "#A8A29E", underline = true },
+    ["@comment"] = { font_style = "italic", italic = true, bg = "none", fg = "#A8A29E" },
     DiffChange = {
       bg = "#464414",
       fg = "none",
@@ -68,7 +68,7 @@ M.ui = {
       "position",
     },
     modules = {
-      position = " Ln: %l🔰Col: %c",
+      position = " l: %l  c: %c",
     },
   },
   telescope = {

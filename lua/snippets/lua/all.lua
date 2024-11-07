@@ -12,6 +12,7 @@ local rep = require("luasnip.extras").rep
 local l = require("luasnip.extras").lambda
 local treesitter_postfix = require("luasnip.extras.treesitter_postfix").treesitter_postfix
 local postfix = require("luasnip.extras.postfix").postfix
+local events = require "luasnip.util.events"
 
 local date = function()
   return { os.date "%Y-%m-%d" }
@@ -126,4 +127,21 @@ return {
     dscr = "Create TODO",
     priority = 5000,
   }, fmt([[{{/*TODO: {}*/}}]], i(1))),
+  s("qwer", {
+    i(1, "useEffect", {
+      node_callbacks = {
+        [events.enter] = function()
+          -- print "enter!!!"
+          vim.lsp.buf.code_action {
+            filter = function(action)
+              return action.title:match 'Add import from "react"' ~= nil
+            end,
+          }
+        end,
+      },
+    }),
+    t "(() => {",
+    i(2),
+    t "}, [])",
+  }),
 }
