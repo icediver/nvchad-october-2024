@@ -19,7 +19,7 @@ M.base46 = {
 
   hl_override = {
     Comment = { italic = true, bg = "none", fg = "#059669" },
-    ["@comment"] = { font_style = "italic", italic = true, bg = "none", fg = "#A8A29E" },
+    ["@comment"] = { italic = true },
     DiffChange = {
       bg = "#464414",
       fg = "none",
@@ -43,6 +43,17 @@ M.base46 = {
       fg = "#a0a0a0",
       bg = "none",
     },
+    SpellBad = { bg = "none", fg = "orange", sp = "#FF0000" },
+    SpellCap = { bg = "none", fg = "#FF0000" },
+    SpellLocal = { bg = "none", fg = "#FF0000" },
+    SpellRare = { bg = "none", fg = "#FF0000" },
+
+    FloatBorder = { fg = "#5A0DAC", bg = "NONE" },
+    NormalFloat = { fg = "NONE", bg = "NONE" },
+    CmpBorder = { link = "FloatBorder" },
+    CmpDocBorder = { link = "CmpBorder" },
+    CmpDoc = { bg = "NONE", fg = "orange" },
+    NvimTreeCursorLine = { link = "CursorLine" },
   }, -- hl_override = {
   -- 	Comment = { italic = true },
   -- 	["@comment"] = { italic = true },

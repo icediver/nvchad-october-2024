@@ -8,10 +8,10 @@ end
 -- vim.g.lua_snippets_path = "~/.config/nvim/lua/snippets/luasnippets"
 vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/snippets/lua"
 vim.g.vscode_snippets_path = vim.fn.stdpath "config" .. "/lua/snippets/"
-
+print(vim.inspect(vim))
 -- add yours here!
 
 local o = vim.o
 o.relativenumber = true
-o.spell = true
+o.spell = false
 -- o.cursorlineopt ='both' -- to enable cursorline!

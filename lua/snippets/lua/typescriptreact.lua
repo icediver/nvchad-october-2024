@@ -19,6 +19,9 @@ local jt = su.join_text
 local function page_name(_, parent)
   return sn(nil, i(1, su.dir_name(parent)))
 end
+local function component_name(_, parent)
+  return sn(nil, i(1, su.file_name(parent)))
+end
 
 return {
   s(
@@ -135,12 +138,12 @@ return {
     },
     fmt(
       [[export default function {}Page({{
-	params,
-}}: {{
-	params: {{ id: string }};
-}}) {{
-	return <div>{} Page</div>;
-}}    ]],
+              params,
+            }}: {{
+              params: {{ id: string }};
+            }}) {{
+              return <div>{} Page</div>;
+            }}    ]],
       {
         d(1, page_name),
         rep(1),
@@ -160,6 +163,47 @@ return {
     }}
     ]],
       d(1, page_name)
+    )
+  ),
+  s(
+    {
+      trig = "ns",
+      name = "Simple Nextjs component",
+      dscr = "Next.js simple component",
+      priority = 5000,
+    },
+    fmt(
+      [[export  function {} ()  {{
+          return <div>{}</div>
+    }}
+    ]],
+      {
+        d(1, component_name),
+        rep(1),
+      }
+    )
+  ),
+  s(
+    {
+      trig = "nsi",
+      name = "Simple Nextjs component",
+      dscr = "Next.js simple component",
+      priority = 5000,
+    },
+    fmt(
+      [[interface I{} {{
+    
+}}
+export  function {} (props: I{})  {{
+    return <div>{}</div>
+}}
+]],
+      {
+        d(1, component_name),
+        rep(1),
+        rep(1),
+        rep(1),
+      }
     )
   ),
 }

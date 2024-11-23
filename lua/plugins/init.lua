@@ -1,4 +1,6 @@
 local overrides = require "configs.overrides"
+local twfold = require "plugins.configs.tw-fold"
+
 return {
   {
     "stevearc/conform.nvim",
@@ -45,9 +47,7 @@ return {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
-    config = function()
-      require "configs.custom.nvimsurround"
-    end,
+    opts = require "configs.custom.nvimsurround",
   },
   {
     "hrsh7th/nvim-cmp",
@@ -91,13 +91,17 @@ return {
         "hrsh7th/cmp-path",
       },
     },
-    opts = function()
-      return require "configs.custom.cmp"
-    end,
+    -- opts = function()
+    --   return require "configs.custom.cmp"
+    -- end,
+    opts = require "configs.custom.cmp",
   },
   {
     "Exafunction/codeium.vim",
     lazy = false,
+    config = function()
+      require "plugins.configs.codeium"
+    end,
   },
   {
     "laytan/tailwind-sorter.nvim",
@@ -106,35 +110,20 @@ return {
     build = "cd formatter && npm ci && npm run build",
     -- config = true,
     config = function()
-      require("tailwind-sorter").setup {
-        on_save_enabled = true, -- If `true`, automatically enables on save sorting.
-        on_save_pattern = { "*.html", "*.js", "*.jsx", "*.tsx", "*.twig", "*.hbs", "*.php", "*.heex", "*.astro" }, -- The file patterns to watch and sort.
-        node_path = "node",
-        trim_spaces = false, -- If `true`, trim any extra spaces after sorting.
-      }
+      require "plugins.configs.tw-sorter"
     end,
   },
   {
     "js-everts/cmp-tailwind-colors",
-    config = {
-      enable_alpha = true, -- requires pumblend > 0.
-
-      format = function(itemColor)
-        return {
-          fg = itemColor,
-          bg = nil, -- or nil if you dont want a background color
-          text = "󰏘", -- or use an icon
-        }
-      end,
-    },
+    config = function()
+      require "plugins.configs.tw-colors"
+    end,
   },
   {
     "razak17/tailwind-fold.nvim",
-    opts = {
-      symbol = "󱏿", -- 󱏿
-    },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ft = { "html", "svelte", "astro", "vue", "typescriptreact", "php", "blade" },
+    opts = twfold.opts,
+    dependencies = twfold.dependencies,
+    ft = twfold.ft,
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
