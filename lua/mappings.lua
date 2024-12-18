@@ -11,8 +11,18 @@ map("i", "jk", "<ESC>")
 
 -- Basic
 map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save" })
+
+-- Codeium
 map("i", "<C-g>", function()
   return vim.fn["codeium#Accept"]()
+end, { expr = true })
+
+map("i", "<C-l>", function()
+  return vim.fn["codeium#AcceptNextWord"]()
+end, { expr = true })
+
+map("i", "<C-j>", function()
+  return vim.fn["codeium#AcceptNextLine"]()
 end, { expr = true })
 
 -- Tailwind-Fold

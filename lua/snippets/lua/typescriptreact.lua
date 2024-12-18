@@ -16,11 +16,18 @@ local su = require "snippets.lua.common.snip_utils"
 local nl = su.new_line
 local te = su.trig_engine
 local jt = su.join_text
+
 local function page_name(_, parent)
   return sn(nil, i(1, su.dir_name(parent)))
 end
 
-return {
+local function file_name(_, parent)
+  return sn(nil, i(1, su.file_name(parent)))
+end
+
+
+-- stylua: ignore start
+local snippets = {
   s(
     {
       trig = "uss",
@@ -155,11 +162,68 @@ return {
       priority = 5000,
     },
     fmt(
-      [[export default function {}Layout ({{ children }}: {{ children: React.ReactNode }})  {{
-          return <div>{{children}}</div>
-    }}
-    ]],
+[[export default function {}Layout ({{ children }}: {{ children: React.ReactNode }})  {{
+    return <div>{{children}}</div>
+}}
+]],
       d(1, page_name)
     )
   ),
+s(
+    {
+      trig = "ns",
+      name = "Simple Nextjs component",
+      dscr = "Next.js simple component",
+      priority = 5000,
+    },
+    fmt(
+[[export default function {} ()  {{
+    return <div>{}</div>
+}}
+]],
+      {
+        d(1, file_name),
+        rep(1),
+      }
+    )
+  ),
+s(
+    {
+      trig = "nsi",
+      name = "Simple Nextjs component with interface",
+      dscr = "Next.js simple component with interface",
+      priority = 5000,
+    },
+    fmt(
+[[interface {} {{
+{}
+}}
+
+export default function {} ({{{setter}}}: {})  {{
+    return <div>{component}</div>
+}}
+]],
+      {
+        c(1,{
+          {t"I" ,d(1, file_name) },
+          {d(1,  file_name), t "Props"},
+        }),
+        i(2, 'value: string;'),
+        d(3, file_name),
+        rep(1),
+        -- rep(1),
+        -- setter = rep(1):gsub("(.-):.*\n?", "%1\n")
+        -- d(7, file_name),
+        setter = l(l._1:gsub(":.-;", ","):gsub("?", ""), 2),
+        component = f(function(_, parent) return su.file_name(parent) end),
+      }
+    )
+  ),
+
+
 }
+
+
+return snippets
+
+---- stylua: ignore end

@@ -18,8 +18,8 @@ if filetype_mapping_fp ~= nil then
     if line == nil then
       break
     end
-    filetype = nil
-    aliases = {}
+    local filetype = nil
+    local aliases = {}
     for word in line:gmatch "[^%s]+" do
       if filetype == nil then
         filetype = word
@@ -39,10 +39,40 @@ local function script_path()
   return str:match "(.*/)" .. "../"
 end
 
+local function kebabToPascal(str)
+  local words = {}
+
+  for word in string.gmatch(str, "[^%-%_]+") do
+    table.insert(words, string.upper(string.sub(word, 1, 1)) .. string.lower(string.sub(word, 2)))
+  end
+
+  return table.concat(words, "")
+end
+
+local function kebabToPascalWithoutExtension(filename)
+  -- Удаляем расширение
+  local baseFilename = filename:gsub("%.[^.]*$", "") -- Убираем всё после последней точки
+
+  -- Преобразуем из кебаб-нотации в Паскаль-нотацию
+  local words = {}
+
+  for word in string.gmatch(baseFilename, "[^%-%_]+") do
+    table.insert(words, string.upper(string.sub(word, 1, 1)) .. string.lower(string.sub(word, 2)))
+  end
+
+  return table.concat(words, "")
+end
+
 local function dir_name(parent)
   local env = parent.snippet.env
   local dir = env.TM_DIRECTORY:gsub(".*/", "")
   local name = dir:gsub("%W", ""):gsub("^%l", string.upper)
+  return name
+end
+
+local function file_name(parent)
+  local env = parent.snippet.env
+  local name = kebabToPascalWithoutExtension(env.TM_FILENAME)
   return name
 end
 
@@ -423,4 +453,5 @@ return {
   code_shell = code_shell,
   make_actions = make_actions,
   dir_name = dir_name,
+  file_name = file_name,
 }

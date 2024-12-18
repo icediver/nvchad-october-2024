@@ -13,5 +13,5 @@ vim.g.vscode_snippets_path = vim.fn.stdpath "config" .. "/lua/snippets/"
 
 local o = vim.o
 o.relativenumber = true
-o.spell = true
+o.spell = false
 -- o.cursorlineopt ='both' -- to enable cursorline!

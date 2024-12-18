@@ -95,7 +95,7 @@ return {
       i(2),
     })
   ),
-  s("co", {
+  s("clm", {
     t "position([",
     f(function()
       local register_data = vim.fn.getreg() .. ""
@@ -107,7 +107,7 @@ return {
     end),
     t "])",
   }),
-  s("com", {
+  s("chrom", {
     d(function()
       local register_data = vim.fn.getreg() .. ""
       if string.match(register_data, "[%d-]+,%s*[%d-]+") then

@@ -18,6 +18,7 @@ local options = {
       prepend_args = {
         "--single-attribute-per-line",
         "--bracket-same-line",
+        "false",
       },
     },
   },

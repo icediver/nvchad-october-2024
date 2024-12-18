@@ -45,6 +45,11 @@ lspconfig.cssls.setup {
         unknownAtRules = "ignore",
       },
     },
+    scss = {
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
   },
 }
 lspconfig.tailwindcss.setup {

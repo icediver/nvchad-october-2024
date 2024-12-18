@@ -1,4 +1,4 @@
-local cmp = require "cmp"
+local cmp_local = require "cmp"
 
 dofile(vim.g.base46_cache .. "cmp")
 local kind_icons = {
@@ -27,6 +27,7 @@ local kind_icons = {
   Event = "",
   Operator = "󰆕",
   TypeParameter = "󰅲",
+  Codeium = "",
 }
 local cmp_ui = require("nvconfig").ui.cmp
 local cmp_style = cmp_ui.style
@@ -37,25 +38,7 @@ local field_arrangement = {
 }
 
 local formatting_style = {
-  -- default fields order i.e completion word + item.kind + item.kind icons
-  -- fields = field_arrangement[cmp_style] or { "menu", "abbr", "kind" },
-  --
-  -- format = function(_, item)
-  --   local icons = require "nvchad.icons.lspkind"
-  --   local icon = (cmp_ui.icons and icons[item.kind]) or ""
-  --   icon = require("cmp-tailwind-colors").format(item)
-  --
-  --   if cmp_style == "atom" or cmp_style == "atom_colored" then
-  --     icon = " " .. icon .. " "
-  --     item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
-  --     item.kind = icon
-  --   else
-  --     icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
-  --     item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
-  --   end
-  --
-  --   return item
-  -- end,
+
   fields = { "kind", "abbr", "menu" }, -- order of columns,
   format = function(entry, item)
     item.menu = item.kind
@@ -105,21 +88,21 @@ local options = {
   formatting = formatting_style,
 
   mapping = {
-    ["<c-p>"] = cmp.mapping.select_prev_item(),
-    ["<c-n>"] = cmp.mapping.select_next_item(),
-    ["<c-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<c-f>"] = cmp.mapping.scroll_docs(4),
-    ["<c-space>"] = cmp.mapping.complete(),
-    ["<c-e>"] = cmp.mapping.close(),
+    ["<c-p>"] = cmp_local.mapping.select_prev_item(),
+    ["<c-n>"] = cmp_local.mapping.select_next_item(),
+    ["<c-d>"] = cmp_local.mapping.scroll_docs(-4),
+    ["<c-f>"] = cmp_local.mapping.scroll_docs(4),
+    ["<c-space>"] = cmp_local.mapping.complete(),
+    ["<c-e>"] = cmp_local.mapping.close(),
 
-    ["<CR>"] = cmp.mapping.confirm {
+    ["<CR>"] = cmp_local.mapping.confirm {
       -- behavior = cmp.confirmbehavior.insert,
       select = true,
     },
 
-    ["<tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
+    ["<tab>"] = cmp_local.mapping(function(fallback)
+      if cmp_local.visible() then
+        cmp_local.select_next_item()
       elseif require("luasnip").expand_or_jumpable() then
         require("luasnip").expand_or_jump()
       else
@@ -127,9 +110,9 @@ local options = {
       end
     end, { "i", "s" }),
 
-    ["<s-tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
+    ["<s-tab>"] = cmp_local.mapping(function(fallback)
+      if cmp_local.visible() then
+        cmp_local.select_prev_item()
       elseif require("luasnip").jumpable(-1) then
         require("luasnip").jump(-1)
       else
@@ -140,6 +123,7 @@ local options = {
   sources = {
     { name = "luasnip", priority = 5000 },
     { name = "emmet_ls" },
+    { name = "codeium" },
     { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "nvim_lua" },
